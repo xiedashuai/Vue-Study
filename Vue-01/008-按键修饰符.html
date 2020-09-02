@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- .enter  .delete ... -->
+    <div id='app'>
+        <input type="text" @keyup.enter="submit">
+        <input type="text" @keyup.delete="submit">
+        <input type="text" @keyup.xxx="submit">
+
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        // 自定义按键
+        Vue.config.keyCodes.xxx = 18; //alt
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                submit() {
+                    console.log("提交成功~");
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

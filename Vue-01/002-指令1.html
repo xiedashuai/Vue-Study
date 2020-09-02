@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-cloak:防止页面加载时闪烁 -->
+    <div id='app' v-cloak>
+        <div>{{msg}}</div>
+        <!-- v-pre 跳过这个元素和它的子元素的编译过程。 -->
+        <div v-pre>{{msg}}</div>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "v-cloak 指令 v-pre 指令"
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

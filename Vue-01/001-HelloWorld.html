@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- mvvm中的 v  -->
+    <div id='app'>
+        <p>{{msg}}</p>
+    </div>
+
+    <script src='../js/vue.js'></script>
+    <script>
+        // mvvm中的vm
+        const vm = new Vue({
+            el: '#app',
+            // mvvm中的m
+            data: {
+                msg: "Hello World!"
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

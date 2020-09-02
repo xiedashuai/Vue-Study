@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-on  -->
+    <div id='app'>
+        <div>{{num}}</div>
+        <button v-on:click="handle">按钮1</button>
+        <!-- v-on: 简写 @ -->
+        <button @click="handle">按钮2</button>
+        <hr>
+        <button @click="add1">按钮99</button>
+        <!-- 带参数的处理函数如何获取按钮内容 -->
+        <button @click="add2(20,$event)">按钮100</button>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                num: 10
+            },
+            methods: {
+                handle() {
+                    // this-->vm 
+                    console.log(this === vm);
+                    this.num++;
+                },
+                add1(e) {
+                    console.log(e.target.innerHTML);
+                },
+                add2(num, e) {
+                    console.log(num);
+                    console.log(e.target.innerHTML);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

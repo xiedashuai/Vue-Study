@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <style>
+        .section {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+
+        .active {
+            font-size: 40px;
+        }
+
+        .color {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-bind  简写： -->
+    <div id='app'>
+        <!-- 单向绑定 -->
+        <input type="text" v-bind:value="msg">
+        <input type="text" v-model="msg">
+        {{msg}}
+        <hr>
+        <!-- 1.直接绑定变量 -->
+        <div :class="obj">文字111</div>
+        <!-- 2.绑定对象 -->
+        <!-- 属性绑定类名不会与原有的class属性冲突 -->
+        <div class="color" :class="{section:isSection,active:true}">文字222</div>
+        <!-- 3.绑定数组 [a,b]表示变量  ['a','b']表示类名-->
+        <div class="color" :class="[a,b]">文字333</div>
+        <div class="color" :class="['color','active']">文字444</div>
+
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "haha",
+                obj: {
+                    section: true,
+                    active: true
+                },
+                isSection: true,
+                a: "color",
+                b: "active"
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

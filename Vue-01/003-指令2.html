@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-text 和 v-html -->
+    <div id='app'>
+        <p>{{msg}}</p>
+        <!-- v-text指令用于将数据填充到标签中，作用
+            与插值表达式类似，但是没有闪动问题 -->
+        <p v-text="text"></p>
+        <p v-html="html"></p>
+        <hr>
+        <!-- 在 v-text v-html 赋值的时候不要再写 其他内容 会覆盖-->
+        <p v-text="text">====</p>
+        <p v-html="html">{{text}}</p>
+        <hr>
+        <!-- 区别:v-text输出的是纯文本，浏览器不会对其再进行html解析，
+            但v-html会将其当html标签解析后输出。 -->
+        <p v-text="text1"></p>
+        <p v-html="html1"></p>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "指令2",
+                text: "这是text指令",
+                html: "这是html指令",
+                text1: "<strong>这是text指令</strong>",
+                html1: "<strong>这是html指令</strong>"
+
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

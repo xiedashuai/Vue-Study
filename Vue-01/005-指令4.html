@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-model -->
+    <!-- - 当数据发生变化的时候，视图也就发生变化
+    - 当视图发生变化的时候，数据也会跟着同步变化 -->
+    <div id='app'>
+        <p>{{msg}}</p>
+        <input type="text" v-model="msg">
+        <hr>
+        <input type="radio" value="男" v-model="isCheck">男
+        <input type="radio" value="女" v-model="isCheck">女 {{isCheck}}
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "10",
+                isCheck: "",
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

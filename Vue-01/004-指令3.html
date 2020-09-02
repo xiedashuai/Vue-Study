@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-once -->
+    <div id='app'>
+        <p>{{number}}</p>
+        <!-- 数据初始化 只执行一次 再次改变数据对象上的值，插值不会发生变化 -->
+        <h3 v-once>{{number}}</h3>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                number: 10,
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

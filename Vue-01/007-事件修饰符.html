@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+    <style>
+        .father {
+            width: 100px;
+            height: 100px;
+            background-color: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- .stop .prevent .once -->
+    <div id='app'>
+        <div class="father" @click="father">
+            <button @click="son">按钮</button>
+            <!-- .stop 阻止冒泡 -->
+            <button @click.stop="son">按钮2</button>
+            <!-- 可以链式编程 -->
+            <a href="http://www.baidu.com" @click.prevent.stop="handle">百度</a>
+        </div>
+        <!-- .prevent 阻止默认行为 -->
+        <a href="http://www.baidu.com" @click.prevent="handle">百度</a>
+        <hr>
+        <!-- .once 修饰符只会执行一次  第二次点击会跳转页面-->
+        <a href="http://www.baidu.com" @click.prevent.once="aHandler">淘宝</a>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                father() {
+                    console.log("触发了father事件");
+                },
+                son() {
+                    console.log("触发了son事件");
+                },
+                handle() {
+                    console.log("页面没有跳转");
+                },
+                aHandler() {
+                    console.log("触发了a的默认行为");
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

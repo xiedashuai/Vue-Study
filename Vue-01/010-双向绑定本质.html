@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <input type="text" v-model="msg">
+        {{msg}}
+        <hr>
+        <!-- 双向绑定的本质 使用了属性绑定和事件绑定 -->
+        <input type="text" :value="msg" @input="change">
+        <hr>
+        <input type="text" id="ipt">
+        <div id="div"></div>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "lalala"
+            },
+            methods: {
+                change(e) {
+                    console.log(e.target.value);
+                    this.msg = e.target.value;
+                }
+            },
+        })
+        // 属性绑定的本质 利用  Object.defineProperty中的set()函数
+        var obj = {
+            a: 10
+        }
+
+        var ipt = document.querySelector("#ipt");
+        var div = document.querySelector("#div")
+        Object.defineProperty(obj, 'a', {
+            set(newValue) {
+                console.log(newValue);
+                ipt.value = newValue;
+                div.innerHTML = newValue;
+            }
+        })
+        ipt.addEventListener("input", function () {
+            obj.a = this.value;
+        })
+    </script>
+</body>
+
+</html>
