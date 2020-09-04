@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <input type="text" v-focus1>
+        <input type="text" v-color1="msg">
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg: {
+                    color: "red"
+                }
+            },
+            methods: {},
+            //局部指令，需要定义在  directives 的选项
+            directives: {
+                // 指令名: 配置对象
+                focus1: {
+                    inserted(el) {
+                        el.focus();
+                    }
+                },
+                color1: {
+                    bind(el, binding) {
+                        el.style.backgroundColor = binding.value.color;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

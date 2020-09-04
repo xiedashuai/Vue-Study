@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <input type="text" v-focus>
+        <input type="text" value="123" v-color="obj" />
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        // Vue.directive  注册全局指令
+        //全局指令定义 一定要定义在创建实例之前  Vue.directive(指令名,{配置对象})
+        Vue.directive('focus', {
+            // el表示的就是当前使用该指令的dom元素
+            inserted(el) {
+                el.focus();
+            }
+        })
+
+        // 带参数的全局自定义指令
+        Vue.directive('color', {
+            bind(el, binding) {
+                // binding.value是data中的obj对象  obj: { color: "red", bgcolor: "green"}
+                el.style.color = binding.value.color;
+                el.style.backgroundColor = binding.value.bgcolor;
+            }
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                obj: {
+                    color: 'red',
+                    bgcolor: 'yellowgreen',
+                }
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-for  -->
+    <div id='app'>
+        <!-- 1.遍历数字 -->
+        <ul>
+            <li v-for="(item,index) in 5" :key="index">{{item}}</li>
+        </ul>
+        <hr>
+        <!-- 2.遍历字符串 -->
+        <ul>
+            <li v-for="(item,index) in 'welcome~'" :key="index">{{item}}</li>
+        </ul>
+        <hr>
+        <!-- 3.遍历数组1-->
+        <ul>
+            <li v-for="(item,index) in arr1" :key="index">{{item}}--{{index}}</li>
+        </ul>
+        <hr>
+        <!-- 4.遍历数组2-->
+        <ul>
+            <li v-for="item in arr2" :key="item.id">{{item.name}}----{{item.gender}}</li>
+        </ul>
+        <hr>
+        <!-- 5.遍历对象 -->
+        <ul>
+            <li v-for="(value,key,index) in obj" :key="index">{{value}}--{{key}}--{{index}}</li>
+        </ul>
+        <hr>
+        <!--  `v-if` 与 `v-for` 一起使用 -->
+        <div v-if='flag' v-for='(v,k,i) in obj'>{{v + '---' + k + '---' + i}}
+        </div>
+        <hr>
+        <div v-if='v==1000' v-for='(v,k,i) in obj'>{{v + '---' + k + '---' + i}}
+        </div>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false,
+                arr1: ['a', 'b', 'c', 'd'],
+                arr2: [{
+                    id: 1,
+                    name: '小红',
+                    gender: '女'
+                }, {
+                    id: 2,
+                    name: '小明',
+                    gender: '男'
+                }, {
+                    id: 1,
+                    name: '小桃',
+                    gender: '女'
+                }],
+                obj: {
+                    name: '雨小仙',
+                    age: 1000,
+                    gender: '女'
+                }
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

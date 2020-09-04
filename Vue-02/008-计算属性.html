@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!--  
+        当多次调用 addNum  的时候 
+        只要里面的 num 值不改变 他会把第一次计算的结果直接返回
+		直到data 中的num值改变 计算属性才会重新发生计算
+        -->
+        <div>{{addNum}}</div>
+        <div>{{addNum}}</div>
+        <div>{{addNum}}</div>
+        <hr>
+        <!-- 计算属性与方法的区别:计算属性是基于依赖进行缓存的，而方法不缓存 -->
+        <!-- 调用methods中的方法的时候  他每次会重新调用 -->
+        <div>{{reverseStr()}}</div>
+        <div>{{reverseStr()}}</div>
+        <div>{{reverseStr()}}</div>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                num: 5,
+                str: 'methods'
+            },
+            methods: {
+                reverseStr() {
+                    console.log("methods中的方法被调用了");
+                    return this.str.split('').reverse().join('');
+                }
+            },
+            computed: {
+                // 形式上是一个函数,最终使用的时候当做属性来使用的  
+                // 计算属性基于data中的数据进行缓存的.只有依赖的数据发生更改,计算属性才会重新执行
+                addNum() {
+                    console.log("计算属性被调用了");
+                    var total = 0;
+                    for (var i = 0; i < this.num; i++) {
+                        total += i;
+                    }
+                    return total;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

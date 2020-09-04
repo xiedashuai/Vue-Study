@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+
+        .color {
+            color: red;
+        }
+
+        .fs {
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- v-cloak v-text v-html v-pre v-once v-model v-on v-bind 事件修饰符 按键修饰符 自定义按键修饰符 -->
+    <div id="app" v-cloak>
+        <p> {{msg}}</p>
+        <p v-text="msg1"></p>
+        <p v-html="msg1"></p>
+        <span v-pre>{{ this will not be compiled }}</span>
+        <p v-pre>{{msg}}</p>
+        <p v-once>{{msg}}</p>
+        <hr>
+        <input type="text" v-model="num"> {{num}}
+        <button v-on:click="handler">按钮</button>
+        <button @click="handler1(20,$event)">按钮1</button>
+        <a href="" @click.stop.prevent="handler"></a>
+        <input type="text" @keyup.enter="handler">
+        <input type="text" @keyup.wcg="handler">
+        <hr>
+        <ul :class="{color:isColor,fs:isFs}">
+            <li>学习Vue</li>
+        </ul>
+        <div :style="{color:activeColor,fontSize:activeSize}">复习Vue</div>
+
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        Vue.config.keyCodes.wcg = 18; //alt
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '指令复习~',
+                msg1: '<strong>指令复习~</strong>',
+                num: '起飞~',
+                isColor: true,
+                isFs: true,
+                activeColor: 'red',
+                activeSize: '25px'
+            },
+            methods: {
+                handler() {
+                    console.log(111);
+                },
+                handler1(n, e) {
+                    console.log(n);
+                    console.log(e.target.innerHTML);
+                }
+            },
+            computed: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>
