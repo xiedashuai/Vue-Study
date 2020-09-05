@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 侦听器，计算属性，methods方法的比较 -->
+    <div id='app'>
+        <input type="text" v-model.number="num1">
+        <span>+</span>
+        <input type="text" v-model.number="num2">
+        <div>计算结果:{{calc()}}----methods</div>
+        <div>计算结果:{{getSum}}----computed</div>
+        <div>计算结果:{{sum}}----watch</div>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        // 方法一般需要配合着事件来触发, 不会进行结果的缓存
+        // 计算属性, 可以将计算结果进行缓存, 只要数据不发生变化, 不会重新执行,
+        // 侦听器: 侦听的数据必须在data中定义，侦听器可以做异步, 路由地址的监听
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                num1: 1,
+                num2: 2,
+                sum: 3,
+            },
+            methods: {
+                calc() {
+                    return this.num1 + this.num2;
+                }
+            },
+            computed: {
+                getSum() {
+                    return this.num1 + this.num2;
+                }
+            },
+            watch: {
+                num1(newVal) {
+                    this.sum = newVal + this.num2;
+                },
+                num2(newVal) {
+                    this.sum = this.num1 + newVal;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

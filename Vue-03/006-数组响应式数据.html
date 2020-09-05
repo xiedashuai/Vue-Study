@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <ul>
+            <li v-for="(item,index) in list" :key="index">{{item}}</li>
+        </ul>
+        <hr>
+        <div>{{info.name}}</div>
+        <div>{{info.age}}</div>
+        <div>{{info.gender}}</div>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                list: ['apple', 'lemon', 'banana'],
+                info: {
+                    name: 'wanglaoban',
+                    age: 12,
+                }
+            },
+            methods: {},
+        })
+        //vm.list[0] = 'orange'; //这种方法不是响应式的 数据改变 视图没有改变
+        //响应式数据第一种方法：
+        // Vue.set(vm.list, 0, 'pear');
+        //第二种方法：
+        vm.$set(vm.list, 0, 'grape');
+
+        //vm.info.gender = 'female'; 
+        // Vue.set(vm.info, 'gender', 'male');
+        vm.$set(vm.info, 'gender', 'female');
+    </script>
+</body>
+
+</html>
