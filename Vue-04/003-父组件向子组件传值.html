@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 1.传值，在子组件使用的位置，通过属性绑定的方式 -->
+        <son :title="msg"></son>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        Vue.component('son', {
+            //2.接收，在子组件定义的位置通过props属性来接收，props是一个数组
+            props: ['title'],
+            template: `<div>子组件获得了父组件传来的数据--{{title}}</div>`,
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                //父组件向子组件传的值
+                msg: `father loves son`,
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <div :style="{color:color1}">老父亲的微笑---{{num1}}</div>
+        <!-- 2 父组件用v-on 监听子组件的事件
+        这里 change-color  是从 $emit 中的第一个参数对应   handler 为对应的事件处理函数	
+        $event 用来接收子组件传出来的数据
+	    -->
+        <son :msg="arr" @change-color="handler" @change-color2="handler2($event)"></son>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        // 1.在子组件中定义事件 ，在事件中通过$emit触发一个方法 $emit("自定义事件名")
+        // 2.在父组件中 定义自定义事件名
+        // 3.在父组件中定义方法
+        Vue.component('son', {
+            props: ['msg'],
+            //  1、子组件用$emit()触发事件
+            //第一个参数为 自定义的事件名称   第二个参数为需要传递的数据  
+            template: `
+            <div>
+                <ul>
+                    <li :key='index' v-for='(item,index) in msg'>{{item}}</li>
+                </ul>
+                <button @click="$emit('change-color')">子传父</button>
+                <button @click="$emit('change-color2',num)">子传父带参数</button>
+            </div>
+            `,
+            data() {
+                return {
+                    num: 12
+                }
+            }
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                arr: ['apple', 'orange', 'banana'],
+                color1: 'red',
+                num1: '',
+            },
+            methods: {
+                handler() {
+                    this.color1 = 'green';
+                },
+                handler2(val) {
+                    this.num1 = val;
+                }
+
+
+            },
+        })
+    </script>
+</body>
+
+</html>

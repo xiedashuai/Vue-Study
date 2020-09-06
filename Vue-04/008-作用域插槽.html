@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+		1、当我们希望li的样式由外部使用组件的地方定义，因为可能有多种地方要使用该组件，
+		但样式希望不一样 这个时候我们需要使用作用域插槽 
+	-->
+    <div id='app'>
+        <!-- 2、 父组件中使用了<template>元素,而且包含scope="scoped",
+			scoped在这里只是临时变量   
+        --->
+        <son :msg="arr">
+            <template v-slot="scoped">
+                <div>{{scoped}}</div>
+                <div>{{scoped.row}}</div>
+            </template>
+        </son>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        //作用域插槽的作用 ：父组件可以对子组件加工处理
+        Vue.component('son', {
+            props: ['msg'],
+            // 3、在子组件模板中,<slot>元素上有一个类似props传递数据给组件的写法msg="xxx",
+            // 插槽可以提供一个默认内容，如果如果父组件没有为这个插槽提供了内容，会显示默认的内容。
+            //如果父组件为这个插槽提供了内容，则默认的内容会被替换掉
+            template: `
+            <div>
+                <ul>
+                    <li :key='index' v-for='(item,index) in msg'>
+                        <slot :row='item'>{{item.name}}</slot>
+                    </li>
+                </ul>
+            </div>
+            `,
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                arr: ['apple', 'orange', 'banana'],
+            },
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 这里的所有组件标签中嵌套的内容会替换掉slot 
+             如果不传值 则使用 slot 中的默认值  -->
+        <test>可以添加内容了</test>
+        <test></test>
+        <test>传值</test>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        Vue.component('test', {
+            template: `
+                <div>
+                    <p>匿名插槽</p>
+                    <slot>123<slot>
+                </div>         
+            `,
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

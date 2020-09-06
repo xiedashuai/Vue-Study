@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <test>
+            <!-- 注意点：template临时的包裹标签最终不会渲染到页面上     -->
+            <template slot='header'>
+                <p>标题信息1</p>
+                <p>标题信息2</p>
+            </template>
+            <p>主要内容1</p>
+            <p>主要内容2</p>
+            <template slot='footer'>
+                <p>底部信息信息1</p>
+                <p>底部信息信息2</p>
+            </template>
+        </test>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        Vue.component('test', {
+            //1、 使用 <slot> 中的 "name" 属性绑定元素 指定当前插槽的名字
+            // 注意点： 
+            //具名插槽的渲染顺序，完全取决于模板，而不是取决于父组件中元素的顺序
+            template: `
+                <div>
+                    <header>
+                        <slot name='header'></slot>
+                    </header>
+                    <main>
+                        <slot></slot>
+                    </main>
+                    <footer>
+                        <slot name='footer'></slot>
+                    </footer>
+                </div>`,
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>

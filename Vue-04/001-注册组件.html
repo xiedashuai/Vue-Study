@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 组件也是一个vue实例 vue实例也是一个组件 -->
+    <div id='app'>
+        <!-- 2、 组件使用 组件名称 是以HTML标签的形式使用  -->
+        <my-test></my-test>
+        <my-test2></my-test2>
+        <my-test3></my-test3>
+
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        //组件就是封装好的结构样式逻辑代码的一个功能性代码，重用，分治
+        //  全局注册组件 
+        // 1、 my-test 就是组件中自定义的标签名
+        Vue.component('my-test', {
+            template: `<div>这是一个全局组件</div>`,
+        })
+
+        // 定义组件的模板
+        const obj = {
+            template: `<div>这是一个局部组件222</div>`,
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components: {
+                //局部注册组件  
+                'my-test2': {
+                    template: `<div>这是一个局部组件</div>`,
+                },
+                //也可以抽离组件对象
+                'my-test3': obj,
+            }
+        })
+    </script>
+</body>
+
+</html>
