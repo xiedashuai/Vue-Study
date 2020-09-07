@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <test>
+            <template v-slot="scoped">
+                <p>{{scoped}}</p>
+                <p v-if="scoped.row"><button>成功的按钮</button></p>
+                <p v-else><button>失败的按钮</button></p>
+            </template>
+        </test>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script>
+        Vue.component('test', {
+            template: `<div><slot :row="data"></slot></div>`,
+            data() {
+                return {
+                    data: true
+                }
+            }
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+        })
+    </script>
+</body>
+
+</html>
