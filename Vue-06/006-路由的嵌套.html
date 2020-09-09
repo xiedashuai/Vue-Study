@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <router-link to="/banzhang">班长</router-link>
+        <router-link to="/zuzhang">组长</router-link>
+        <router-link to="/zuyuan">组员</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <script>
+        const banzhang = {
+            template: '<h4>班长</h4>'
+        }
+        const zuzhang = {
+            template: '<h4>组长</h4>'
+        }
+        const zuyuan = {
+            template: `<h4>
+            <router-link to="/zuyuan/xiaohong">小红</router-link>
+            <router-link to="/zuyuan/xiaotao">小桃</router-link>
+            <router-link to="/zuyuan/xiaolan">小兰</router-link>
+            <router-view></router-view>
+            </h4>
+            `,
+        }
+        const xiaohong = {
+            template: `<h4>小红</h4>`,
+        }
+        const xiaotao = {
+            template: `<h4>小桃</h4>`,
+        }
+        const xiaolan = {
+            template: `<h4>小兰</h4>`,
+        }
+
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    redirect: '/banzhang'
+                },
+                {
+                    path: '/banzhang',
+                    component: banzhang
+                },
+                {
+                    path: '/zuzhang',
+                    component: zuzhang
+                },
+                {
+                    path: '/zuyuan',
+                    component: zuyuan,
+                    children: [{
+                            path: '/zuyuan/xiaohong',
+                            component: xiaohong
+                        },
+                        {
+                            path: '/zuyuan/xiaotao',
+                            component: xiaotao
+                        },
+                        {
+                            path: '/zuyuan/xiaolan',
+                            component: xiaolan
+                        },
+                    ]
+                },
+            ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router,
+        })
+    </script>
+</body>
+
+</html>

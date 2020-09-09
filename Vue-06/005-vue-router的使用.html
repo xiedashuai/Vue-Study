@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!--  6. a标签  to属性 相当于a标签 href属性 -->
+        <router-link to="/music">音乐</router-link>
+        <router-link to="/movie">电影</router-link>
+        <router-link to="/news">新闻</router-link>
+        <!-- 7.路由占位 可以简写为单标签 -->
+        <router-view />
+    </div>
+    <!-- 1.引入vue和vue-router -->
+    <script src='../js/vue.js'></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <script>
+        //vue-router 使用：
+        /*  1.引入vue 和 vue-router
+            2.创建组件
+            3.创建路由规则 是一个数组
+            4.创建路由实例并挂载规则
+            5.将路由实例挂载给vue实例
+            6.<router-link to>
+            7.<router-view>
+        */
+
+        //  2. 创建组件
+        const music = {
+            template: `<div>音乐列表</div>`,
+        }
+        const movie = {
+            template: `<div>电影列表</div>`,
+        }
+        const news = {
+            template: `<div>新闻列表</div>`,
+        }
+
+        //   3.创建路由规则,是一个数组
+        //   4.创建路由实例并挂载规则
+        const router = new VueRouter({
+            routes: [
+                //路由重定向 如果打开的页面是空白的url 默认指定跳转的地址
+                {
+                    path: '/',
+                    redirect: '/music'
+                },
+                {
+                    path: '/music',
+                    component: music
+                },
+                {
+                    path: '/movie',
+                    component: movie
+                },
+                {
+                    path: '/news',
+                    component: news
+                },
+            ]
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            //5.将路由实例挂载给vue实例
+            router,
+        })
+    </script>
+</body>
+
+</html>

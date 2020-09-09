@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../js/axios.js"></script>
+    <script>
+        //axios 全局配置
+        //配置 请求的基准url地址
+        axios.defaults.baseURL = 'http://localhost:3000/';
+        //配置 请求头信息
+        axios.defaults.headers['mytoken'] = 'hello';#
+        //配置 超时时间
+        axios.defaults.timeout = 2500;
+
+        //axios 拦截器
+        //请求拦截器 发送请求之前会进入请求拦截器
+        axios.interceptors.request.use(function (config) {
+            // config.headers.mytoken = 'nihao';
+            return config;
+        }, function (err) {
+            console.log(err)
+        })
+        //响应拦截器 响应之前会进入响应拦截器
+        axios.interceptors.response.use(function (res) {
+            // console.log(res)
+            //在响应拦截器中 将data剥离
+            var data = res.data;
+            return data;
+        }, function (err) {
+            console.log(err)
+        })
+
+        //axios 请求参数传递
+        //get(查) 传参 1 
+        axios.get('axios?id=123')
+            .then(res => {
+                console.log(res);
+            })
+        //2
+        axios.get('axios/123')
+            .then(res => {
+                console.log(res);
+            })
+        //3
+        axios.get('axios', {
+                params: {
+                    id: 789
+                }
+            })
+            .then(res => {
+                console.log(res);
+            })
+
+        //delete(删) 传参
+        axios.delete('axios', {
+                params: {
+                    id: 111
+                }
+            })
+            .then(res => {
+                console.log(res);
+            })
+
+        //post(增) 传参 1
+        axios.post('axios', {
+                uanme: 'lisi',
+                pwd: 123
+            })
+            .then(res => {
+                console.log(res);
+            })
+        //2
+        var params = new URLSearchParams();
+        params.append('uname', 'zs');
+        params.append('pwd', 123);
+        axios.post('axios', params)
+            .then(res => {
+                console.log(res);
+            })
+
+        //put(改) 传参
+        axios.put('axios/123', {
+                uname: 'wangwu',
+                pwd: 145
+            })
+            .then(res => {
+                console.log(res);
+            })
+    </script>
+</body>
+
+</html>

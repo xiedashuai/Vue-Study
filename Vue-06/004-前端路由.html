@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 被 vue 实例控制的 div 区域 -->
+    <div id="app">
+        <!-- 切换组件的超链接 -->
+        <a href="#/zhuye">主页</a>
+        <a href="#/keji">科技</a>
+        <a href="#/caijing">财经</a>
+        <a href="#/yule">娱乐</a>
+
+        <!-- 根据 :is 属性指定的组件名称，把对应的组件渲染到 component 标签所在的位置 -->
+        <!-- 可以把 component 标签当做是【组件的占位符】 -->
+        <component :is="comName"></component>
+    </div>
+
+    <script src="../js/vue.js"></script>
+    <script>
+        //1.路由的本质就是一种对应关系
+        //2.后端路由:请求方式和请求的地址被服务器监听到之后, 数据库的增删改查操作,返回给前端数据
+        //          后端路由是由服务器端进行实现，并完成资源的分发
+        //3.前端路由:根据不同的用户事件显示不同的页面内容
+        //          前端路由是依靠hash值(锚链接)的变化进行实现 
+
+        // 定义组件
+        const zhuye = {
+            template: `<h1>主页信息</h1>`,
+        }
+        const keji = {
+            template: `<h1>科技信息</h1>`,
+        }
+        const caijing = {
+            template: `<h1>财经信息</h1>`,
+        }
+        const yule = {
+            template: `<h1>娱乐信息</h1>`,
+        }
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                comName: 'zhuye'
+            },
+            //注册私有组件
+            components: {
+                zhuye,
+                keji,
+                caijing,
+                yule
+            }
+        })
+
+        //监听window的onhashchange事件，根据获取到的最新的hash值，切换要显示的组件的名称
+        window.onhashchange = function () {
+            //通过location.hash 获取到最新的hash值
+            console.log(location.hash);
+            switch (location.hash.slice(1)) {
+                case '/zhuye':
+                    vm.comName = 'zhuye';
+                    break;
+                case '/keji':
+                    vm.comName = 'keji';
+                    break;
+                case '/caijing':
+                    vm.comName = 'caijing';
+                    break;
+                case '/yule':
+                    vm.comName = 'yule';
+                    break;
+
+            }
+        }
+    </script>
+</body>
+
+</html>

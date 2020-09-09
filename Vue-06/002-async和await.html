@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+
+    </div>
+    <script src='../js/vue.js'></script>
+    <script src="../js/jquery.js"></script>
+    <script>
+        // 之前 多次使用ajax请求数据, 写的是回调地狱的样式,后来通过使用promise处理,将回调地狱的问题解决了
+        // async和await是来进一步简化异步操作的(本质就是为了简化.then)
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            // 1. 函数前async关键字    async 放在函数之前,将函数变为一个异步函数
+            // 2. await关键字只能放在async函数中
+            // 3. async 和 await 一般是同时出现的
+            async created() {
+                // Promise.then 可以拿到响应的结果
+                // axios.get("fruits").then((res) => {
+                //   console.log(res);
+                //   this.list = res.data;
+                // });
+                // await后面的是一个promise对象
+                //    console.log( axios.get('fruits'));
+                const res = await axios.get("fruits");
+                console.log(res);
+            },
+        })
+
+        //进一步解决回调地狱问题
+        // promise的封装
+        function request(url) {
+            return new Promise((resolve, reject) => {
+                $.ajax({
+                    url: url,
+                    success(data) {
+                        resolve(data);
+                    },
+                    error(err) {
+                        reject(err);
+                    },
+                });
+            });
+        }
+        //  额外定义一个async函数
+        async function fn() {
+            //  第一个await没有响应结束,第二个await是不会响应的
+            const res1 = await request("http://localhost:3000/data");
+            const res2 = await request("http://localhost:3000/data1");
+            const res3 = await request("http://localhost:3000/data2");
+            console.log(res1);
+            console.log(res2);
+            console.log(res3);
+        }
+        fn();
+    </script>
+</body>
+
+</html>
