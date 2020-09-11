@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <!-- 编程式导航 就是通过js的方式实现页面跳转 -->
+        <!-- 声明式导航  只有点击a链接的时候跳转和传递参数 -->
+        <router-link to="/login/2233/11">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+    <!-- location.href 原生js的编程式导航 -->
+    <!-- <button onclick="location.href='http://www.baidu.com'">按钮</button> -->
+    <script src='../js/vue.js'></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <script>
+        // 动态路由匹配，将路由地址中的参数拿到$route是当前路由地址的信息对象
+        const login = {
+            template: `<div>登录模块--{{$route.params.id}}--{{$route.params.num}}<br><button @click="jump">跳转</button></div>`,
+            methods: {
+                jump() {
+                    // console.log(this.$router); / / 路由实例
+                    // go(数值) 正数前进  负数后退 
+                    // back()后退 = go(-1) 
+                    this.$router.push('/register');
+                }
+            }
+        }
+        const register = {
+            //   通过编程式导航的方式跳转传递的是另一个值
+            template: `<div>注册模块<br><button @click="rejump">跳转</button></div>`,
+            methods: {
+                rejump() {
+                    this.$router.push('/login/456/789');
+                }
+            }
+        }
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    redirect: '/login'
+                },
+                {
+                    path: '/login/:id/:num',
+                    component: login,
+                },
+                {
+                    path: '/register',
+                    component: register,
+                },
+            ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router,
+        })
+    </script>
+</body>
+
+</html>

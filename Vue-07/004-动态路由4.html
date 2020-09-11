@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <router-link to="/login">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <script>
+        // 动态路由匹配，将路由地址中的参数拿到$route是当前路由地址的信息对象
+        const login = {
+            props: ['name', 'age', 'boo'],
+            template: `<div>登录模块---{{name}}--{{age}}--{{boo}}</div>`,
+        }
+        const register = {
+            template: `<div>注册模块</div>`,
+        }
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    redirect: '/login'
+                },
+                // props对象方式  静态属性
+                //如果props设置为对象，则传递的是对象中的数据给组件
+                {
+                    path: '/login',
+                    component: login,
+                    props: {
+                        name: 'zs',
+                        age: 15,
+                        boo: true
+                    }
+                },
+                {
+                    path: '/register',
+                    component: register,
+                },
+            ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router,
+        })
+    </script>
+</body>
+
+</html>

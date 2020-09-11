@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <router-link to="/loginloginloginloginloginlogin/2233">登录</router-link>
+        <!-- router-link 属性绑定的方式  name的值一定加引号  -->
+        <router-link :to="{name:'login',params: {id: '100'}}">新闻</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <script>
+        // 命名路由,有时使用地址来回跳转,不太方便,更希望使用一个别名,来控制路由的跳转
+        const login = {
+            props: ['id'],
+            template: `<div>登录模块--{{id}}</div>`,
+        }
+        const register = {
+            template: `<div>注册模块</div>`,
+        }
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    redirect: '/login'
+                },
+                {
+                    path: '/loginloginloginloginloginlogin/:id',
+                    name: 'login',
+                    component: login,
+                    props: true
+                },
+                {
+                    path: '/register',
+                    component: register,
+                },
+            ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router,
+        })
+    </script>
+</body>
+
+</html>

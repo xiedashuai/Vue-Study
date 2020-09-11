@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='app'>
+        <router-link to="/login/2233">登录</router-link>
+        <router-link to="/register">注册</router-link>
+
+        <router-view></router-view>
+    </div>
+    <script src='../js/vue.js'></script>
+    <script src="../js/vue-router_3.0.2.js"></script>
+    <script>
+        // 动态路由匹配，将路由地址中的参数拿到$route是当前路由地址的信息对象
+        const login = {
+            props: ['name', 'sex', 'id'],
+            template: `<div>登录模块---{{name}}--{{sex}}--{{id}}</div>`,
+        }
+        const register = {
+            template: `<div>注册模块</div>`,
+        }
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    redirect: '/login'
+                },
+                //  将静态值与基于路由的值结合 函数的方式
+                //如果props设置为函数，则通过函数的第一个参数获取路由对象
+                //并可以通过路由对象的params属性获取传递的参数
+                {
+                    path: '/login/:id',
+                    component: login,
+                    props: (route) => {
+                        return {
+                            id: route.params.id,
+                            name: "lisi",
+                            sex: "man",
+                        }
+                    }
+                },
+                {
+                    path: '/register',
+                    component: register,
+                },
+            ]
+        })
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router,
+        })
+    </script>
+</body>
+
+</html>
